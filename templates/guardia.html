@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form method="POST">
+    <div class='jumbotron text-center'>
+        <p></p>
+        <select class="selectpicker" name="uselection" onchange="this.form.submit()">
+            <option disabled selected>Lista de victimas</option>
+            {% if defaultselection != ''%}
+            <option selected>{{defaultselection}}</option>
+            {% endif %}
+            {% for u in users %}
+            <option>{{u.name}}</option>
+            {% endfor %}
+        </select>
+        <p></p>
+        {% if guardiaActiva == '' %}
+            <p>¿Estas de guardia?</p>
+            <!-- <p><button type="submit" class="btn btn-dark" name="check">Buscar guardia</button></p> -->
+        {% elif guardiaActiva == 'True' %}
+            <p>Parece que si, empezo {{ fecha }}. Ya terminaste?</p>
+            <p><button type="submit" class="btn btn-dark" name="done">Terminar</button></p>
+        {% elif guardiaActiva == 'New' %}
+            <p>Suerte. No te olvides de darle a terminar despues.</p>
+            <p><button type="submit" class="btn btn-dark" name="done">Terminar</button></p>
+        {% elif guardiaActiva == 'False' %}
+            <p>No, vas arrancar una? Bajon...</p>
+            <p><button type="submit" class="btn btn-dark" name="start">Comenzar</button></p>
+        {% endif %}
+        <p></p>
+        <p></p>
+    </div>
+</form>
+{% endblock %}

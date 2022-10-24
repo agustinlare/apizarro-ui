@@ -1,0 +1,5 @@
+__pycache__/
+cluster.json
+minikube
+*.vscode/
+*.DS*

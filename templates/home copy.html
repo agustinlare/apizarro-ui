@@ -1,0 +1,95 @@
+  
+{% extends 'layout.html' %}
+
+{% block body %}
+<form method='POST'>
+    <main role="main">
+
+
+        <div class="jumbotron">
+          <div class="container">
+            <h1 class="display-3">Bienvenido SRE</h1> 
+            <p>Tu prima es una zorra</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+          </div>
+        </div>
+  
+        <div class="container">
+          <h2><em>Continue con las selecciones...</em></h2>
+          <div class="row">
+<!--CLUSTER-->
+            <div class="col-md-4">
+              <select class="selectpicker" name="clustersel" onchange="this.form.submit()">
+                <option selected disabled>Seleccionar cluster</option>
+                {% if c_sel != ''%}
+                <option selected>{{c_sel}}</option>
+                {% endif %}
+                {% for c in clusterconfig['clusters'] %}
+                <option>{{c.name}}</option>
+                {% endfor %}    
+            </select>
+            </div>
+<!--ACTION #1 -->
+            {% if c_sel != '' %}
+            <div class="col-md-4">
+              <select class="form-select" name="actionsel" size="7" aria-label="size 3 select example" onchange="this.form.submit()">
+                <option selected disabled>Seleccionar opcion:</option>
+                {% if a_sel != '' %}
+                <option selected>{{a_sel}}</option>
+                {% endif %}
+                {% for a in config['actions'] %}
+                <option>{{a.name}}</option>
+                {% endfor %}
+              </select> 
+              {% if bt1 == True %}
+              <p></p>
+              <button type="submit" class="btn btn-info" name="bt1">Go</button>
+              {% endif %}
+            </div>
+            {% endif %}
+<!--OPTION #2 -->
+            {% if a_sel != '' and bt1 == False %}
+            <div class="col-md-4">
+              {% if o_type == 'list' %}
+              <select class="form-select" name="optionsel" size="7" aria-label="size 3 select example" onchange="this.form.submit()">
+                <option selected disabled>Seleccionar opcion:</option>
+                {% if opt != '' %}
+                <option selected>{{opt}}</option>
+                {% endif %}
+                {% for a in o_sel %}
+                <option>{{a}}</option>
+                {% endfor %} 
+              </select> 
+              {% endif %}
+              {% if bt2 == True %}
+              <p></p>
+              <button type="submit" name="bt2" class="btn btn-info">Go</button>
+              {% endif %}
+              {% if o_type == 'textbox' %}
+              <div class="form-group">
+                <input type="text" name="opttextbox" placeholder="Inserte valor" class="form-control">
+              </div>
+              <p></p>
+              <button type="submit" name="bt2" class="btn btn-info">Go</button>
+              {% endif %}
+            </div>
+            {% endif %}
+<!--/OPTION #3 -->
+            {% if f_sel != '' %}
+            <div class="col-md-4">
+              <select class="form-select" name="finalsel" size="7" aria-label="size 3 select example">
+                <option selected disabled>Seleccionar opcion:</option>
+                {% for f in f_sel %}
+                <option>{{f}}</option>
+                {% endfor %}
+              </select> 
+              <p></p>
+              <button type="submit" name="bt3" class="btn btn-info">Go</button>
+            </div>
+            {% endif %}
+          </div>
+          <hr>
+          <!-- <img src="static/pizarro.png" class="rounded float-right" alt="Max-width 30%"> -->
+        </div>
+      </main>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form method='POST'>
+    <div class='jumbotron text-center'>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Legajo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Guardias</th>
+                <th scope="col">Horas activo</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for l in final_report %}
+              <tr>
+                <th scope="row">{{l.usuario}}</th>
+                <td>{{l.nombre}}</td>
+                <td>{{l.count}}</td>
+                <td>{{l.time}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-dark" name="current">{{ this_month }}</button>
+        <button type="submit" class="btn btn-dark" name="last">Anterior</button>
+    </div>
+  </form>
+{% endblock %}

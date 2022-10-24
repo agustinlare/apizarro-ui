@@ -1,0 +1,103 @@
+  
+{% extends 'layout.html' %}
+
+{% block body %}
+<form method='POST'>
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">Bienvenido SRE</h1> 
+    <p>Como te ven te tratan, y si te ven mal... ¡te maltratan! y si te ven bien te Con-tratan</p>
+  </div>
+</div>
+<section class="input-group-select">
+  <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Atiendo boludos</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 mb-4" id="select-pizarro-kibana-indice">
+                  <h6>Select Cluster</h6>
+                  <div class="input-group mb-3">
+                      <select class="selectpicker" name="cluster_sel">
+                          <option selected disabled>Seleccionar cluster</option>
+                          {% for c in config['clusters'] %}
+                            {% if c.name == c_sel %}
+                            <option selected>{{c.name}}</option>
+                            {% endif %}
+                          <option>{{c.name}}</option>
+                          {% endfor %}    
+                        </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mb-4" id="select-pizarro-kibana-indice">
+                  <h6>Select action</h6>
+                  <div class="input-group mb-3">
+                      <select class="selectpicker" name="action_sel" onchange="this.form.submit()">
+                        <option selected disabled>Seleccionar accion</option>
+                          {% for a in config['actions'] %}
+                            {% if a.name == a_sel %}
+                            <option selected>{{a.name}}</option>
+                            {% endif %}
+                          <option>{{a.name}}</option>
+                          {% endfor %}   
+                        </select>
+                  </div>
+                </div>
+              </div>
+              {% if projects != '' %} <!--SEL 1-->
+              <div class="row">
+                <div class="col-md-12 mb-4" id="select-pizarro-kibana-indice">
+                  <h6>Select project</h6>
+                  <div class="input-group mb-3">
+                    {% if sel_n == 2 %}
+                    <select class="form-select" name="projects" aria-label="size 3 select example" onchange="this.form.submit()">
+                    {% else %}
+                    <select class="form-select" name="projects" aria-label="size 3 select example">
+                    {% endif %}
+                    {% for a in projects %}
+                      {% if a == projects %}
+                      <option selected>{{a}}</option>
+                      {% endif %}
+                    <option>{{a}}</option>
+                    {% endfor %}   
+                  </select>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% if pods != '' %} <!--SEL 1-->
+              <div class="row">
+                <div class="col-md-12 mb-4" id="select-pizarro-kibana-indice">
+                  <h6>Select project</h6>
+                  <div class="input-group mb-3">
+                    <select class="form-select" name="pods" aria-label="size 3 select example">
+                      {% for a in pods %}
+                        {% if a == sel_1 %}
+                      <option selected>{{a}}</option>
+                        {% endif %}
+                      <option>{{a}}</option>
+                      {% endfor %}   
+                    </select>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% if text_on == True %}
+              <input type="text" name="opttextbox" placeholder="" style="width:500px" class="form-control">
+              {% endif %}
+              <p></p>
+              {% if btn_on == True %}
+              <button type="submit" name="btn" class="btn btn-info">Go</button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+{% endblock %}

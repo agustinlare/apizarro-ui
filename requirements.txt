@@ -1,0 +1,5 @@
+openshift-client
+flask
+flask_wtf
+wtforms
+mariadb
